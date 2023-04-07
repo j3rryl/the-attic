@@ -19,7 +19,8 @@ import com.squareup.picasso.Picasso;
 
 public class SinglePostActivity extends AppCompatActivity {
     private ImageView singelImage;
-    private TextView singleTitle, singleDesc;
+
+    private TextView singleTitle, singleDesc,postDate,postAuthor;
     String post_key = null;
     private DatabaseReference mDatabase;
     private Button deleteBtn;
@@ -31,6 +32,9 @@ public class SinglePostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_post);
         singelImage = findViewById(R.id.singleImageview);
         singleTitle = findViewById(R.id.singleTitle);
+        postDate = findViewById(R.id.postDate);
+        postAuthor = findViewById(R.id.postAuthor);
+
         singleDesc = findViewById(R.id.singleDesc);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
         post_key = getIntent().getExtras().getString("PostID");
@@ -53,8 +57,16 @@ public class SinglePostActivity extends AppCompatActivity {
                 String post_desc = (String) dataSnapshot.child("desc").getValue();
                 String post_image = (String) dataSnapshot.child("postImage").getValue();
                 String post_uid = (String) dataSnapshot.child("uid").getValue();
+
+                String post_author = (String) dataSnapshot.child("displayName").getValue();
+                String post_author_image = (String) dataSnapshot.child("profilePhoto").getValue();
+                String post_date = (String) dataSnapshot.child("date").getValue();
+                String post_time = (String) dataSnapshot.child("time").getValue();
+
                 singleTitle.setText(post_title);
                 singleDesc.setText(post_desc);
+                postDate.setText("Date posted: "+post_date+" "+post_time);
+                postAuthor.setText("Author: "+post_author);
                 Picasso.with(SinglePostActivity.this).load(post_image).into(singelImage);
                 if (mAuth.getCurrentUser().getUid().equals(post_uid)){
                     deleteBtn.setVisibility(View.VISIBLE);

@@ -135,6 +135,18 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(singleActivity);
                     }
                 });
+                holder.shareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this awesome post");
+                        Intent chooser = Intent.createChooser(shareIntent, "Share via");
+                        if (shareIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(chooser);
+                        }
+                    }
+                });
                 holder.likePostButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -190,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         public TextView postTime;
         public TextView postDate;
         public LinearLayout post_layout;
-        public ImageButton likePostButton, commentPostButton;
+        public ImageButton likePostButton, commentPostButton,shareButton;
         public TextView displayLikes;
         //Declare an int variable to hold the count of likes
         int countLikes;
@@ -213,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
             postDate = itemView.findViewById(R.id.date);
             post_layout = itemView.findViewById(R.id.linear_layout_post);
             likePostButton = itemView.findViewById(R.id.like_button);
+            shareButton = itemView.findViewById(R.id.share);
             commentPostButton = itemView.findViewById(R.id.comment);
             displayLikes = itemView.findViewById(R.id.likes_display);
 //Initialize a database reference where you will store the likes

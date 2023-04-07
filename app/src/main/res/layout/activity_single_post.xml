@@ -34,6 +34,20 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_height="wrap_content"
         android:text="Post Description"
         android:id="@+id/singleDesc"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:id="@+id/postAuthor"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:text="Date Posted"
+        android:id="@+id/postDate"/>
 
     <Button
         android:id="@+id/deleteBtn"
