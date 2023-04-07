@@ -95,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
                      @Override
                      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                         mDatabaseUser.child(" displayName").setValue(name);
+                         mDatabaseUser.child("displayName").setValue(name); //There was some space
                          mDatabaseUser.child("profilePhoto").setValue(profileImage).addOnCompleteListener(new
                                   OnCompleteListener<Void>() {
                                       @Override

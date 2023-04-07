@@ -61,7 +61,6 @@ public class PostActivity extends AppCompatActivity {
         textTitle = findViewById(R.id.textTitle);
 //Initialize the storage reference
         mStorageRef = FirebaseStorage.getInstance().getReference();
-//Initialize the database reference/node where you will be storing posts
         databaseRef = FirebaseDatabase.getInstance().getReference().child("Posts");
 //Initialize an instance of Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
@@ -86,17 +85,14 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(PostActivity.this, "POSTING...", Toast.LENGTH_LONG).show();
-//get title and desc from the edit texts
                 final String PostTitle = textTitle.getText().toString().trim();
                 final String PostDesc = textDesc.getText().toString().trim();
-//get the date and time of the post
                 java.util.Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat currentDate= new SimpleDateFormat("dd-MM-yyyy");
                 final String saveCurrentDate=currentDate.format(calendar.getTime());
                 java.util.Calendar calendar1 = Calendar.getInstance();
                 SimpleDateFormat currentTime= new SimpleDateFormat("HH:mm");
                 final String saveCurrentTime=currentTime.format(calendar1.getTime());
-// do a check for empty fields
                 if (!TextUtils.isEmpty(PostDesc) && !TextUtils.isEmpty(PostTitle)) {
                     StorageReference filepath =
                             mStorageRef.child("post_images").child(uri.getLastPathSegment());
